@@ -1,0 +1,57 @@
+{% extends 'basic.html' %}
+{% block title %} Quick View {% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row my-4">
+    <div class="col-md-4">
+        <div class="row">
+            <img src="/media/{{fetch_data.0.product_image}}" class="card-img-top" alt="...">
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="row">
+            <h4>{{fetch_data.0.product_name}}</h4>
+            <p>{{fetch_data.0.product_desc}}</p>
+            <h6>Price : {{fetch_data.0.product_price}}</h6>
+        </div>
+        <div class="row my-4">
+           <a href="/checkout/"> <button class="btn btn-dark cart mx-3">Checkout</button></a>
+            <button id="{{i.id}}" class="btn btn-dark cart">Add to cart</button>
+        </div>
+    </div>
+</div>
+<div class="fb-comments" data-href="http://127.0.0.1:8000/productview/{{fetch_data.0.id}}" data-width="100%" data-numposts="7"></div>
+
+</div>
+
+
+{% endblock %}
+{% block js %}
+<script>
+  if (localStorage.getItem('cart') == null) {
+      var cart = {};
+  } else {
+      cart = JSON.parse(localStorage.getItem('cart'));
+  }
+  var sum = 0;
+  if ($.isEmptyObject(cart)){
+      mystr = `<p class='mx-4 mt-2'>Your Cart is empty, Please Add Some item Before Checkout</p>`
+      $('#items').append(mystr);
+  }
+  else{
+  for(item in cart){
+      let name = cart[item][1];
+      let qty = cart[item][0];
+      sum = sum + qty;
+      mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                ${name}
+                <span class="badge badge-primary badge-pill">${qty}</span>
+              </li>`
+      $('#items').append(mystr);
+  }
+  }
+  document.getElementById('cart').innerHTML = sum;
+  $('#itemsJson').val(JSON.stringify(cart));
+  
+  </script>
+{% endblock %}

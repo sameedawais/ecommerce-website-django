@@ -1,0 +1,42 @@
+{% extends 'basic.html' %}
+{% block title %} Contact Us {% endblock %}
+{% block body %} 
+    <div class="container text-center mt-4">
+        <h1>Contact Us</h1>
+      </div>
+    <br>
+          <div class="container">
+            <form action="/contacts/" method="POST"> {% csrf_token %}
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">Name</label>
+                    <input type="text" class="form-control" id="inputname" name="name" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputfname4">Father Name</label>
+                    <input type="text" class="form-control" id="inputfname4" name="f_name" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">Email</label>
+                    <input type="email" class="form-control" id="inputEmail4" name="email" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputphone">Phone No.</label>
+                    <input type="text" class="form-control" id="inputphone" name="phone" required>
+                  </div>
+                <div class="form-group col-md-12">
+                  <label for="inputAddress">How may i help you? </label>
+                  <textarea class="form-control" id="inputAddress" name="address" rows="5" required></textarea>
+                </div>
+                </div>
+                <button type="submit" class="btn btn-dark">Submit</button>
+                <!-- <div class="alert alert-success mx-4 my-4" role="alert">
+                  {{thank_you}}
+                </div> -->
+              </form>
+              
+        </div>
+        
+
+
+{% endblock %}
